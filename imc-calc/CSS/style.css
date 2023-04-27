@@ -20,7 +20,7 @@ body {
 .container {
     max-width: 300px;
     margin: 2rem auto;
-    background-color: #dedfebee;
+    background-color: #dedfebd8;
     border-radius: 15px;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.6);
 }
@@ -73,7 +73,7 @@ input {
     align-items: center;
 }
 
-#result button {
+#btncalc {
     padding: 8px;
     width: 250px;
     margin-top: 1rem;
@@ -87,7 +87,7 @@ input {
     cursor: pointer;
 }
 
-#result button:hover {
+#btncalc:hover {
     background-color: #a8a8ff;
     color: #000;
 }
