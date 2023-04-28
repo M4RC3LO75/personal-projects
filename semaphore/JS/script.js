@@ -9,7 +9,7 @@ const tlChange = (event) => {
 }
 
 const nextIndex = () => {
-    colorIndex = colorIndex > 0 ? --colorIndex : 0;
+    colorIndex = colorIndex > 0 ? --colorIndex : 2;
 }
 
 const changeLight = () => {
