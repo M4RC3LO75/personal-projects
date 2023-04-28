@@ -41,6 +41,7 @@ function reset() {
     if (msg.style.background == 'red') {
         bulb.src ='img/off.jpg';
         bulb.classList.remove('broken');
+        bulb.classList.remove('active')
         msg.style.background = '#0f0f66';
         msg.innerHTML = 'Experimente dar duplo clique na lâmpada';
         msg.style.cursor = 'text';
