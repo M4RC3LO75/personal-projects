@@ -1,8 +1,10 @@
 const trafficLight = document.querySelector('#trafficlight')
 const buttons = document.querySelector('#buttons')
 let colorIndex = 0;
+let intervalId = null;
 
 const tlChange = (event) => {
+    stopAutomatic();
     turnOn[event.target.id]();
 }
 
@@ -17,11 +19,15 @@ const changeLight = () => {
     nextIndex();
 }
 
+const stopAutomatic = () => {
+    clearInterval(intervalId);
+}
+
 const turnOn = {
     'btnred':       () => trafficLight.src = './img/red.png',
     'btnyellow':    () => trafficLight.src = './img/yellow.png',
     'btngreen':     () => trafficLight.src = './img/green.png',
-    'btnautomatic':    () => setInterval (changeLight, 1000)
+    'btnautomatic':    () => intervalId = setInterval (changeLight, 1000)
 }
 
 
