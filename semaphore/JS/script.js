@@ -1,6 +1,6 @@
 const trafficLight = document.querySelector('#trafficlight')
 const buttons = document.querySelector('#buttons')
-let colorIndex = 0;
+let colorIndex = 2;
 let intervalId = null;
 
 const tlChange = (event) => {
@@ -9,7 +9,7 @@ const tlChange = (event) => {
 }
 
 const nextIndex = () => {
-    colorIndex = colorIndex < 2 ? ++colorIndex : 0;
+    colorIndex = colorIndex > 0 ? --colorIndex : 0;
 }
 
 const changeLight = () => {
