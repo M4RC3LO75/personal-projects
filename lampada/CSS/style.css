@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+body {
+    height: 100%;
+    background-image: linear-gradient(to top, black, #150886);
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+
+header {
+    width: 100%;
+    padding: 10px;
+    border-bottom: 2px solid gray;
+    text-align: center;
+}
+
+#container {
+    background-color: #FFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3rem auto;
+    min-width: 230px;
+    max-width: 500px;
+    border-radius: 15px;
+    padding: 20px;
+    border: 2px solid gray;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.411);
+}
+
+#bulb {
+    min-height: 280px;
+    margin: 25px 0px;
+    cursor: pointer;
+}
+
+#btnswitch {
+    background: url(../img/switch-off.png) no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    width: 110px;
+    height: 60px;
+    cursor: pointer;
+}
+
+p {
+    background-color: #0f0f66;
+    color: #FFF;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    text-align: center;
+    border-radius: 10px;
+    display: none;
+}
