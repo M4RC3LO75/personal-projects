@@ -1,13 +1,14 @@
-const uname = document.querySelector('#txtname');
-const height = document.querySelector('#txtheight');
-const weight = document.querySelector('#txtweight');
+
 const btnCalc = document.querySelector('#btncalc')
-const rText = document.querySelector('#resulttext')
 
 
 
 btnCalc.addEventListener('click', (e) => {
     e.preventDefault();
+    const uname = document.querySelector('#txtname');
+    const height = document.querySelector('#txtheight');
+    const weight = document.querySelector('#txtweight');
+    const rText = document.querySelector('#resulttext')
     
     const nameValue = uname.value;
     const heightValue = Number(height.value);
