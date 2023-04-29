@@ -1,8 +1,8 @@
 'use strict';
 
 const images = [ 
-    {'id': '1', 'url':'./img/gta-v.jpg'},
-    {'id': '2', 'url':'./img/tomb-raider.png'},
+    {'id': '1', 'url':'./img/tomb-raider.png'},
+    {'id': '2', 'url':'./img/gta-v.jpg'},
     {'id': '3', 'url':'./img/god-of-war-ragnarok.jpg'},
     {'id': '4', 'url':'./img/far-cry-6.jpg'},
     {'id': '5', 'url':'./img/donkey-kong-country.jpg'},
