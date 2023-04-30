@@ -8,11 +8,10 @@ const images = [
     {'id': '5', 'url':'./img/donkey-kong-country.jpg', 'title': `Donkey Kong - Country`},
     {'id': '6', 'url':'./img/resident-evil-6.jpg', 'title': `Resident Evil 6`},
     {'id': '7', 'url':'./img/zelda-oot.jpg', 'title': `Zelda - Ocarina of Time`},
-    {'id': '8', 'url':'./img/super-mario-64.jpg', 'title': `Super Mario 64`},
+    {'id': '8', 'url':'./img/super-mario-64.jpg', 'title': `Super Mario 64`, 'button': 'GTA'},
 ]
 
 const containerItems = document.querySelector('#container-items');
-const titleItems = document.querySelector('#title')
 
 
 const loadImages = (images, container) => {

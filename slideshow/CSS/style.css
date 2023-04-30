@@ -34,7 +34,6 @@ html {
 
 .item {
     display: flex;
-    align-items: baseline;
     width: 50vw;
     transition: all 1s;
 }
