@@ -1,6 +1,7 @@
 'use strict ';
 
-const display = document.getElementById('display');
+const subDisplay = document.getElementById('sub-display')
+const mainDisplay = document.getElementById('main-display');
 const numbers = document.querySelectorAll('[id*=key]');
 const operations = document.querySelectorAll('[id*=operation]');
 
@@ -12,16 +13,27 @@ const pendingOperation = () => operation != undefined;
 
 const calculate = () => {
     if (pendingOperation()){
-        const actualNumber = parseFloat(display.textContent.replace(',', '.'));
+        const actualNumber = parseFloat(mainDisplay.textContent.replace(',', '.'));
         newNumber = true;
         const result = eval (`${prevNumber}${operation}${actualNumber}`);
-        updateDisplay(result);
+        updateMainDisplay(result);
     }
 }
 
-const updateDisplay = (text) => {
-    if (newNumber ? display.textContent = text.toLocaleString('BR') : display.textContent += text);
+const updateMainDisplay = (text) => {
+    if (newNumber ? mainDisplay.textContent = text.toLocaleString('BR') : mainDisplay.textContent += text);
+    // if (newNumber) {
+    //     mainDisplay.textContent = text.toLocaleString('BR');
+    //     subDisplay.textContent = text.toLocaleString('BR');
+    // } else {
+    //     mainDisplay.textContent += text.toLocaleString('BR');
+    //     subDisplay.textContent += text.toLocaleString('BR');
+    // }
     newNumber = false;
+}
+
+const updateSubDisplay = (text) => {
+    subDisplay.textContent += text.toLocaleString('BR');
 }
 
 const selectOperation = (event) => {
@@ -29,12 +41,16 @@ const selectOperation = (event) => {
         calculate();
         newNumber = true;
         operation = event.target.textContent;
-        prevNumber = parseFloat(display.textContent.replace(',', '.'));
+        subDisplay.textContent += event.target.textContent;
+        prevNumber = parseFloat(mainDisplay.textContent.replace(',', '.'));
     }
     
 }
 
-const insertNumber = (event) => updateDisplay(event.target.textContent);
+const insertNumber = (event) => {
+    updateMainDisplay(event.target.textContent);
+    updateSubDisplay(event.target.textContent);
+}
 
 numbers.forEach (number => number.addEventListener('click', insertNumber));
 operations.forEach (operation => operation.addEventListener('click', selectOperation));
@@ -46,37 +62,47 @@ const activateEquals = () => {
 }
 document.getElementById('equals').addEventListener('click', activateEquals)
 
-const clearDisplay = () => {
-    display.textContent = ''
+const clearAllDisplays = () => {
+    if (mainDisplay.textContent.length > 0){
+        subDisplay.textContent = subDisplay.textContent.slice(0, mainDisplay.textContent.length);
+    }
+    mainDisplay.textContent = ''
     newNumber = true;
 }
-document.getElementById('clearDisplay').addEventListener('click', clearDisplay);
+document.getElementById('clearDisplay').addEventListener('click', clearAllDisplays);
 
 const clearCalc = () => {
-    clearDisplay();
+    subDisplay.textContent = '';
+    mainDisplay.textContent = '';
+    newNumber = true;
     operation = undefined;
     prevNumber = undefined;
     newNumber = true;
 } 
 document.getElementById('clearCalc').addEventListener('click', clearCalc);
 
-const removeLastNumber = () => display.textContent = display.textContent.slice(0, -1);
+const removeLastNumber = () => {
+    if (mainDisplay.textContent.length > 0){
+        subDisplay.textContent = subDisplay.textContent.slice(0, -1);
+    }
+    mainDisplay.textContent = mainDisplay.textContent.slice(0, -1);
+}
 document.getElementById('backspace').addEventListener('click', removeLastNumber);
 
 const invertSignal = () => {
     newNumber = true;
-    updateDisplay (display.textContent * -1);
+    updateMainDisplay (mainDisplay.textContent * -1);
 }
 document.getElementById('invert').addEventListener('click', invertSignal);
 
-const hasDecimal = () => display.textContent.indexOf(',') != -1;
-const hasValue = () => display.textContent.length > 0;
+const hasDecimal = () => mainDisplay.textContent.indexOf(',') != -1;
+const hasValue = () => mainDisplay.textContent.length > 0;
 const insertDecimal = () => {
     if (!hasDecimal()) {
         if (hasValue()) {
-            updateDisplay (',');
+            updateMainDisplay (',');
         } else {
-            updateDisplay('0,');
+            updateMainDisplay('0,');
         }
     }
 }
@@ -98,11 +124,18 @@ const keyboardMap = {
     '*' : 'operationMultiply',
     '/' : 'operationDivide',
     '=' : 'equals',
-    'enter' : 'equals',
+    'Enter' : 'equals',
+    'c' : 'clearDisplay',
+    'Escape' : 'clearCalc',
+    'Backspace' : 'backspace',
+    ',' : 'decimal',
+
 }
 
 const mapKeyboard = (event) => {
     const key = event.key;
+    const validKey = () => Object.keys(keyboardMap).indexOf(key) != -1;
+    if (validKey())
     document.getElementById(keyboardMap[key]).click();
 }
 document.addEventListener('keydown', mapKeyboard)

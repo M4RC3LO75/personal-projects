@@ -40,8 +40,9 @@ main {
 
 .display {
     display: flex;
-    justify-content: right;
-    height: 50px;
+    justify-content: center;
+    flex-direction: column;
+    height: 70px;
     margin-bottom: 20px;
     background-color: black;
     color: #00ccff;
@@ -51,6 +52,18 @@ main {
     font-size: 3rem;
     border: 1px solid #00ccff;
     overflow: hidden;
+}
+
+#sub-display {
+    display: flex;
+    justify-content: right;
+    font-size: 1.2rem;
+    color: #0083a4;
+}
+
+#main-display {
+    display: flex;
+    justify-content: right;
 }
 
 .calculator-buttons {
