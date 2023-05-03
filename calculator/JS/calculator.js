@@ -23,12 +23,10 @@ const calculate = () => {
 
 const updateMainDisplay = (text) => {
     if (newNumber || mainDisplay.textContent == 0 ? mainDisplay.textContent = text.toLocaleString('BR') : mainDisplay.textContent += text.toLocaleString('BR'));
-    // if (newNumber) {
+    // if (newNumber || mainDisplay.textContent == 0) {
     //     mainDisplay.textContent = text.toLocaleString('BR');
-    //     subDisplay.textContent = text.toLocaleString('BR');
     // } else {
     //     mainDisplay.textContent += text.toLocaleString('BR');
-    //     subDisplay.textContent += text.toLocaleString('BR');
     // }
     newNumber = false;
     newOperation = false;
@@ -106,7 +104,7 @@ const invertSignal = () => {
 document.getElementById('invert').addEventListener('click', invertSignal);
 
 const hasDecimal = () => mainDisplay.textContent.indexOf(',') != -1;
-const hasValue = () => mainDisplay.textContent.length > 0;
+const hasValue = () => mainDisplay.textContent.length > 0 && mainDisplay.textContent != 0 && !newNumber;
 const insertDecimal = () => {
     if (!hasDecimal()) {
         if (hasValue()) {
