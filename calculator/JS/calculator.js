@@ -6,6 +6,7 @@ const numbers = document.querySelectorAll('[id*=key]');
 const operations = document.querySelectorAll('[id*=operation]');
 
 let newNumber = true;
+let newOperation = false;
 let operation;
 let prevNumber;
 
@@ -21,7 +22,7 @@ const calculate = () => {
 }
 
 const updateMainDisplay = (text) => {
-    if (newNumber ? mainDisplay.textContent = text.toLocaleString('BR') : mainDisplay.textContent += text);
+    if (newNumber || mainDisplay.textContent == 0 ? mainDisplay.textContent = text.toLocaleString('BR') : mainDisplay.textContent += text.toLocaleString('BR'));
     // if (newNumber) {
     //     mainDisplay.textContent = text.toLocaleString('BR');
     //     subDisplay.textContent = text.toLocaleString('BR');
@@ -30,26 +31,31 @@ const updateMainDisplay = (text) => {
     //     subDisplay.textContent += text.toLocaleString('BR');
     // }
     newNumber = false;
+    newOperation = false;
 }
 
 const updateSubDisplay = (text) => {
-    subDisplay.textContent += text.toLocaleString('BR');
+    if (newOperation) {
+        subDisplay.textContent = text.toLocaleString('BR');
+    } else {
+        subDisplay.textContent += text;
+    }
 }
 
 const selectOperation = (event) => {
     if (!newNumber) {
         calculate();
         newNumber = true;
-        operation = event.target.textContent;
         subDisplay.textContent += event.target.textContent;
+        operation = event.target.textContent;
         prevNumber = parseFloat(mainDisplay.textContent.replace(',', '.'));
+        newOperation = false;
     }
-    
 }
 
 const insertNumber = (event) => {
-    updateMainDisplay(event.target.textContent);
     updateSubDisplay(event.target.textContent);
+    updateMainDisplay(event.target.textContent);
 }
 
 numbers.forEach (number => number.addEventListener('click', insertNumber));
@@ -59,21 +65,25 @@ const activateEquals = () => {
     calculate();
     operation = undefined;
     newNumber = true;
+    newOperation = true;
 }
 document.getElementById('equals').addEventListener('click', activateEquals)
 
 const clearAllDisplays = () => {
-    if (mainDisplay.textContent.length > 0){
-        subDisplay.textContent = subDisplay.textContent.slice(0, mainDisplay.textContent.length);
+    if (operation == undefined) {
+        subDisplay.textContent = '';
+    } else if (mainDisplay.textContent.length > 0 && mainDisplay.textContent != 0){
+        subDisplay.textContent = subDisplay.textContent.slice(0, -mainDisplay.textContent.length);
     }
-    mainDisplay.textContent = ''
+    
+    mainDisplay.textContent = '0'
     newNumber = true;
 }
 document.getElementById('clearDisplay').addEventListener('click', clearAllDisplays);
 
 const clearCalc = () => {
     subDisplay.textContent = '';
-    mainDisplay.textContent = '';
+    mainDisplay.textContent = '0';
     newNumber = true;
     operation = undefined;
     prevNumber = undefined;
@@ -101,8 +111,10 @@ const insertDecimal = () => {
     if (!hasDecimal()) {
         if (hasValue()) {
             updateMainDisplay (',');
+            updateSubDisplay (',');
         } else {
             updateMainDisplay('0,');
+            updateSubDisplay ('0,');
         }
     }
 }

@@ -57,6 +57,7 @@ main {
 #sub-display {
     display: flex;
     justify-content: right;
+    height: 19px;
     font-size: 1.2rem;
     color: #0083a4;
 }
@@ -64,6 +65,7 @@ main {
 #main-display {
     display: flex;
     justify-content: right;
+    height: 48px;
 }
 
 .calculator-buttons {
