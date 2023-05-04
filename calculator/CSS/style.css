@@ -32,7 +32,7 @@ main {
 .calculator {
     width: 250px;
     margin: 10% auto;
-    background-color: #57a8b3;
+    background-color: #146FC4;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px black;
@@ -50,7 +50,7 @@ main {
     border-radius: 8px;
     font-family: digital;
     font-size: 3rem;
-    border: 1px solid #00ccff;
+    border: 1px solid #71A0C7;
     overflow: hidden;
 }
 
@@ -91,13 +91,13 @@ button {
     font-size: 1.5rem;
     background-color: black;
     color: white;
-    border: 1px solid #00ccff;
+    border: 1px solid #71A0C7;
     cursor: pointer;
     user-select: none;
 }
 
 button:hover {
-    background-color: #00ccff;
+    background-color: #B5C40A;
     color: black;
     border-color: black;
 }
