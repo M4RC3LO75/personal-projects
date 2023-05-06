@@ -4,6 +4,7 @@ const boardSelect = document.querySelectorAll('#board');
 const endgamePanel = document.querySelector('#endgame-panel');
 const endgameMessage = document.querySelector('#endgame-message');
 const restartgameButton = document.querySelector('#restartgame-button');
+const turnText = document.querySelector('#turn-message');
 
 function fieldClick(id) {
     var turn = localStorage.getItem('turn')
@@ -15,8 +16,10 @@ function fieldClick(id) {
 
         if (turn == 'X') {
             localStorage.setItem('turn', 'O');
+            turnText.innerHTML = `Vez: O`;
         } else {
             localStorage.setItem('turn', 'X');
+            turnText.innerHTML = `Vez: X`;
         }
         board = board.substring(0, Number(id) -1) + turn + board.substring(Number(id));
         localStorage.setItem('board', board);
@@ -134,6 +137,7 @@ function restartGame() {
     endgamePanel.style.display = 'none';
     localStorage.setItem('board', '---------')
     localStorage.setItem('turn', 'X');
+    turnText.innerHTML = `Vez: X`;
     for (let id=1; id <=9; id++) {
         document.getElementById(`${id}`).innerHTML = '';
     }

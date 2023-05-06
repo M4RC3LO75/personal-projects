@@ -34,7 +34,7 @@ body {
 div.board {
     padding: 30px;
     background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 8px;
+    border-radius: 8px 8px 0 0;
 }
 
 
@@ -50,6 +50,18 @@ button.field {
     font-size: 4rem;
     color: #bbbb34;
     cursor: pointer;
+}
+
+#turn-message {
+    width: 340px;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border-radius: 0 0 8px 8px;
+    border-top: 1px solid gray;
 }
 
 #endgame-panel {
