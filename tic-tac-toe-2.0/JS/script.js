@@ -1,5 +1,9 @@
 localStorage.setItem('turn', 'X');
 localStorage.setItem('board', '---------')
+const boardSelect = document.querySelectorAll('#board');
+const endgamePanel = document.querySelector('#endgame-panel');
+const endgameMessage = document.querySelector('#endgame-message');
+const restartgameButton = document.querySelector('#restartgame-button');
 
 function fieldClick(id) {
     var turn = localStorage.getItem('turn')
@@ -19,7 +23,8 @@ function fieldClick(id) {
         var winner = verifyWinner(board);
         setTimeout (function () {
                 if (winner) {
-                window.alert(`${winner} venceu!`)
+                endgamePanel.style.display = 'flex';
+                endgameMessage.innerHTML = `${winner} Venceu!!`
             }
         }, 100);
     }
@@ -102,4 +107,10 @@ function verifyDiag(board) {
         }
     }
     return;
+}
+
+function restartGame() {
+    endgamePanel.style.display = 'none';
+    localStorage.setItem('board', '---------')
+    boardSelect['.field'].forEach(boardSelect[0].innerHTML = '');
 }
