@@ -1,5 +1,5 @@
 localStorage.setItem('turn', 'X');
-localStorage.setItem('board', '---------')
+localStorage.setItem('board', '---------');
 const boardSelect = document.querySelectorAll('#board');
 const endgamePanel = document.querySelector('#endgame-panel');
 const endgameMessage = document.querySelector('#endgame-message');
@@ -27,6 +27,13 @@ function fieldClick(id) {
                 endgameMessage.innerHTML = `${winner} Venceu!!`
             }
         }, 100);
+        var tie = verifyTie(board);
+        setTimeout (function () {
+            if (tie) {
+            endgamePanel.style.display = 'flex';
+            endgameMessage.innerHTML = `Empate!!`
+        }
+    }, 100);
     }
     
 }
@@ -39,6 +46,20 @@ function verifyWinner(board) {
         if (!winner) winner = verifyDiag(board);
     }
     return winner;
+}
+
+function verifyTie(board) {
+    var tie;
+    tie = verifyBoard(board);
+    if (tie) return tie;
+}
+
+function verifyBoard(board) {
+    if (!board.includes('-')) {
+        var winner = verifyWinner(board);
+        if (!winner)
+        return board;
+    }
 }
 
 function verifyRow(board) {
@@ -112,5 +133,8 @@ function verifyDiag(board) {
 function restartGame() {
     endgamePanel.style.display = 'none';
     localStorage.setItem('board', '---------')
-    boardSelect['.field'].forEach(boardSelect[0].innerHTML = '');
+    localStorage.setItem('turn', 'X');
+    for (let id=1; id <=9; id++) {
+        document.getElementById(`${id}`).innerHTML = '';
+    }
 }
