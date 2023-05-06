@@ -22,7 +22,6 @@ function fieldClick(id) {
                 window.alert(`${winner} venceu!`)
             }
         }, 100);
-        
     }
     
 }
