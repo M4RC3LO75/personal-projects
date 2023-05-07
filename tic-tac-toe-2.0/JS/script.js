@@ -80,8 +80,9 @@ function fieldClick(id) {
 function cpuPlays() {
     var board = localStorage.getItem('board');
     var emptySpaces = [];
+    if (!board.includes('-')) return;
     for (let i=0; i < board.length; i++) {
-        if (board[i] == '-') emptySpaces.push( i + 1 );
+            if (board[i] == '-') emptySpaces.push( i + 1 );
     }
     setTimeout (function() {
         var id = emptySpaces[Math.floor(Math.random() * emptySpaces.length)];
