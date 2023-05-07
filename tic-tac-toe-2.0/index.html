@@ -9,7 +9,15 @@
     <script src="./JS/script.js" defer></script>
 </head>
 <body>
-    <div class="container">
+    <div id="menu" class="menu">
+        <h1>Jogo da Velha</h1>
+        <div class="menu-button-container">
+            <p>Escolha o modo de jogo:</p>
+            <div class="menu-button" onclick="start('2p')">2 Jogadores</div>
+            <div class="menu-button" onclick="start('cpu')">Computador</div>
+        </div>
+    </div>
+    <div id="game-panel" class="container">
         <h1>Jogo da Velha</h1>
         <div class="board">
             <div class="row">
@@ -29,10 +37,10 @@
             </div>
         </div>
         <div id="turn-message">Vez: X</div>
+    </div>
         <div id="endgame-panel">
             <p id="endgame-message"></p>
             <button id="restartgame-button" onclick="restartGame()">Reiniciar</button>
         </div>
-    </div>
 </body>
 </html>

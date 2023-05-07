@@ -20,10 +20,9 @@ function reset() {
 }
 
 function toggleStartPlayer() {
-    if (localStorage.getItem(`mode`) == `cpu` && localStorage.getItem('starting') == 'p') {
-        localStorage.setItem('starting', 'c');
-        cpuPlays();
-    } else localStorage.setItem('starting', 'p');
+    if (localStorage.getItem('starting') == 'p') {
+        localStorage.setItem('starting') = 'c';
+    } else localStorage.setItem('starting') = 'p';
 }
 
 function menu() {
@@ -40,53 +39,43 @@ function start(mode) {
 }
 
 function fieldClick(id) {
-    var turn = localStorage.getItem('turn')
     var board = localStorage.getItem('board');
-    var button = document.getElementById(id);
+    if (board[Number(id) -1] == '-') {
+        placeOnField(id);
+        if (localStorage.getItem('mode') == 'cpu') cpuPlays();
+    }
+}
 
-    if (!button.innerHTML) {
-        button.innerHTML = turn;
-
-        if (turn == 'X') {
-            localStorage.setItem('turn', 'O');
-            turnText.innerHTML = `Vez: O`;
-        } else {
-            localStorage.setItem('turn', 'X');
-            turnText.innerHTML = `Vez: X`;
+function placeOnField(id) {
+    var board = localStorage.getItem('board');
+    var field = document.getElementById(id);
+    if (!field.innerHTML) {
+        switch (localStorage.getItem('turn')) {
+            case 'X':
+                field.innerHTML = 'X';
+                board = board.substring(0, Number(id) -1) + 'X' + board.substring(Number(id) -1 +1);
+                localStorage.setItem('turn', 'O');
+                break;
+            case 'O':
+                field.innerHTML = 'O';
+                board = board.substring(0, Number(id) -1) + 'O' + board.substring(Number(id) -1 +1);
+                localStorage.setItem('turn', 'X');
+                break;
         }
-        board = board.substring(0, Number(id) -1) + turn + board.substring(Number(id));
         localStorage.setItem('board', board);
-        var winner = verifyWinner(board);
-        setTimeout (function () {
-            if (winner) {
-                gamePanel.style.display = 'none';
-                endgamePanel.style.display = 'flex';
-                endgameMessage.innerHTML = `${winner} Venceu!!`
-            }
-        }, 200);
-        var tie = verifyTie(board);
-        setTimeout (function () {
-            if (tie) {
-                gamePanel.style.display = 'none';
-                endgamePanel.style.display = 'flex';
-                endgameMessage.innerHTML = `Empate!!`
-            }
-        }, 200);
-        
-        toggleStartPlayer();
+        verifyWinner();
     }
 }
 
 function cpuPlays() {
     var board = localStorage.getItem('board');
     var emptySpaces = [];
-    for (let i=0; i < board.length; i++) {
+    for (let i=0; i <= board.length; i++) {
         if (board[i] == '-') emptySpaces.push( i + 1 );
     }
-    setTimeout (function() {
-        var id = emptySpaces[Math.floor(Math.random() * emptySpaces.length)];
-        fieldClick(id);
-    }, 200);
+    var id = emptySpaces[Math.floor(Math.random() * emptySpaces.length)];
+    placeOnField(id);
+    verifyWinner();
 }
 
 function verifyWinner(board) {
